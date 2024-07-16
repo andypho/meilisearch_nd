@@ -21,6 +21,7 @@ defmodule MeilisearchNd.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ecto, "~> 3.11"},
       {:httpoison, "~> 1.4"},
       {:jason, "~> 1.0"}
     ]

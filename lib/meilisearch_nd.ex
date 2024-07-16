@@ -3,16 +3,6 @@ defmodule MeilisearchNd do
   Documentation for `MeilisearchNd`.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> MeilisearchNd.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  @doc false
+  def config, do: Application.get_all_env(:meilisearch_nd)
 end

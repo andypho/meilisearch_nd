@@ -25,4 +25,7 @@ meilisearch_nd-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
+# Ignore asdf local version of elixir.
+.tool-versions
+
 /.vscode
