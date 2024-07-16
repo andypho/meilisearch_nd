@@ -24,3 +24,5 @@ meilisearch_nd-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+/.vscode
