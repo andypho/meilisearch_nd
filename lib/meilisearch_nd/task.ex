@@ -1,5 +1,7 @@
 defmodule MeilisearchNd.Task do
   defmodule Object do
+    alias MeilisearchNd.Helpers
+
     @types %{
       "uid" => :integer,
       "indexUid" => :string,
@@ -18,7 +20,7 @@ defmodule MeilisearchNd.Task do
 
     @spec cast(map(), map()) :: {:ok, map()}
     def cast(data, types \\ @types) do
-      {:ok, MeilisearchNd.Type.cast(data, types)}
+      {:ok, Helpers.Type.cast(data, types)}
     end
   end
 end

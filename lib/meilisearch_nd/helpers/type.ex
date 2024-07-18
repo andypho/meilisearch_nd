@@ -1,4 +1,4 @@
-defmodule MeilisearchNd.Type do
+defmodule MeilisearchNd.Helpers.Type do
   @spec cast(map, map) :: map
   def cast(data, types) do
     Enum.reduce(data, data, fn {key, value}, acc ->

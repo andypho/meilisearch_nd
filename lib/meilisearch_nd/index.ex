@@ -4,6 +4,8 @@ defmodule MeilisearchNd.Index do
   """
 
   defmodule Object do
+    alias MeilisearchNd.Helpers
+
     @types %{
       "uid" => :string,
       "primaryKey" => :string,
@@ -14,12 +16,13 @@ defmodule MeilisearchNd.Index do
     def get_type, do: {:parameterized, __MODULE__, @types}
 
     def cast(data, types \\ @types) do
-      {:ok, MeilisearchNd.Type.cast(data, types)}
+      {:ok, Helpers.Type.cast(data, types)}
     end
   end
 
   alias MeilisearchNd.{
     Client,
+    Helpers,
     Http
   }
 
@@ -33,7 +36,7 @@ defmodule MeilisearchNd.Index do
 
   @spec cast(map(), map()) :: {:ok, map()}
   def cast(data, types \\ @types) do
-    {:ok, MeilisearchNd.Type.cast(data, types)}
+    {:ok, Helpers.Type.cast(data, types)}
   end
 
   @spec get(Client.t()) :: Http.get()
