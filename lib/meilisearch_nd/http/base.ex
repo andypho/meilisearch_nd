@@ -1,4 +1,4 @@
-defmodule MeilisearchNd.HTTPoison do
+defmodule MeilisearchNd.Http.Base do
   use HTTPoison.Base
 
   def process_request_body(body) do

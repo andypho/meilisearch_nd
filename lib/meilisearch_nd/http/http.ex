@@ -1,5 +1,8 @@
 defmodule MeilisearchNd.Http do
-  alias MeilisearchNd.Client
+  alias MeilisearchNd.{
+    Client,
+    Http
+  }
 
   @type response() ::
           {:ok,
@@ -13,41 +16,41 @@ defmodule MeilisearchNd.Http do
   @spec delete(Client.t(), [String.t()], Keyword.t()) :: any()
   def delete(%Client{endpoint: endpoint, key: key}, paths, options \\ []) do
     url = Path.join([endpoint | paths])
-    headers = if key, do: [{"Authorization", "Bearer #{key}"}], else: []
+    headers = add_auth_header(key)
 
-    MeilisearchNd.HTTPoison.delete(url, headers, options)
+    Http.Base.delete(url, headers, options)
   end
 
   @spec get(Client.t(), [String.t()], Keyword.t()) :: get()
   def get(%Client{endpoint: endpoint, key: key}, paths, options \\ []) do
     url = Path.join([endpoint | paths])
-    headers = if key, do: [{"Authorization", "Bearer #{key}"}], else: []
+    headers = add_auth_header(key)
 
-    MeilisearchNd.HTTPoison.get(url, headers, options)
+    Http.Base.get(url, headers, options)
   end
 
   @spec patch(Client.t(), [String.t()], any(), Keyword.t()) :: response()
   def patch(%Client{endpoint: endpoint, key: key}, paths, body, options \\ []) do
     url = Path.join([endpoint | paths])
-    headers = if key, do: [{"Authorization", "Bearer #{key}"}], else: []
+    headers = add_auth_header(key)
 
-    MeilisearchNd.HTTPoison.patch(url, body, headers, options)
+    Http.Base.patch(url, body, headers, options)
   end
 
   @spec post(Client.t(), [String.t()], any(), Keyword.t()) :: response()
   def post(%Client{endpoint: endpoint, key: key}, paths, body, options \\ []) do
     url = Path.join([endpoint | paths])
-    headers = if key, do: [{"Authorization", "Bearer #{key}"}], else: []
+    headers = add_auth_header(key)
 
-    MeilisearchNd.HTTPoison.post(url, body, headers, options)
+    Http.Base.post(url, body, headers, options)
   end
 
   @spec put(Client.t(), [String.t()], any(), Keyword.t()) :: response()
   def put(%Client{endpoint: endpoint, key: key}, paths, body, options \\ []) do
     url = Path.join([endpoint | paths])
-    headers = if key, do: [{"Authorization", "Bearer #{key}"}], else: []
+    headers = add_auth_header(key)
 
-    MeilisearchNd.HTTPoison.put(url, body, headers, options)
+    Http.Base.put(url, body, headers, options)
   end
 
   @spec handle_response_body({:ok, HTTPoison.Response.t()}, function()) ::
@@ -66,4 +69,10 @@ defmodule MeilisearchNd.Http do
   def handle_response_body(any, _fun) do
     any
   end
+
+  defp add_auth_header(key) when is_binary(key) do
+    [{"Authorization", "Bearer #{key}"}]
+  end
+
+  defp add_auth_header(_), do: []
 end
