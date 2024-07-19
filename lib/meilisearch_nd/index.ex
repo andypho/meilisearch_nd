@@ -13,8 +13,10 @@ defmodule MeilisearchNd.Index do
       "updatedAt" => :utc_datetime
     }
 
+    @spec get_type() :: {:parameterized, module(), map()}
     def get_type, do: {:parameterized, __MODULE__, @types}
 
+    @spec cast(map(), map()) :: {:ok, map()}
     def cast(data, types \\ @types) do
       {:ok, Helpers.Type.cast(data, types)}
     end

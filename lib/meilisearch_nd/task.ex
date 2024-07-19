@@ -16,6 +16,7 @@ defmodule MeilisearchNd.Task do
       "finishedAt" => :utc_datetime
     }
 
+    @spec get_type() :: {:parameterized, module(), map()}
     def get_type, do: {:parameterized, __MODULE__, @types}
 
     @spec cast(map(), map()) :: {:ok, map()}
